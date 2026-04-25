@@ -1,1 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&display=swap");
+
 @import "tailwindcss";
+
+@theme {
+  /* Fonts Mapping */
+  --font-heading: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  /* Monad x Aurora Colors Palette */
+  --color-monad-bg: #0b0b0e; /* Hitam pekat agak keunguan buat background */
+  --color-monad-purple: #836ef9; /* Warna ungu khas Monad */
+  --color-monad-glow: #a78bfa; /* Ungu terang untuk efek nyala */
+  --color-aurora-teal: #14b8a6; /* Teal transisi aurora */
+  --color-aurora-emerald: #10b981; /* Hijau Emerald terang */
+}
+
+/* Global Styles biar lu ga perlu nulis class font-body di tiap komponen */
+@layer base {
+  body {
+    background-color: var(--color-monad-bg);
+    color: white;
+    font-family: var(--font-body);
+    /* Penting: hindari scroll di halaman Wrapped */
+    overflow-x: hidden;
+    overscroll-behavior-y: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+  }
+}
