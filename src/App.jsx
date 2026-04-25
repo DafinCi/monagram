@@ -3,8 +3,8 @@ import { WagmiProvider } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { config } from "./config/wagmi";
 
-import Landing from "./components/Shared/Landing";
-import DataWrapper from "./components/Story/DataWrapper";
+import Landing from "./components/shared/Landing";
+import DataWrapper from "./components/story/DataWrapper";
 
 const queryClient = new QueryClient();
 
