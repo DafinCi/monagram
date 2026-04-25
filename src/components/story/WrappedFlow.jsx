@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import StorySlide from "./StorySlide";
-import IdentityCard from "../Card/IdentityCard";
+import IdentityCard from "../card/IdentityCard";
 
 const SLIDE_DURATION = 4000;
 const TOTAL_SLIDES = 5; // Udah diganti jadi 5
