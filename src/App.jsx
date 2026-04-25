@@ -1,34 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from "react";
+import { WagmiProvider } from "wagmi";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { config } from "./config/wagmi";
 
+import Landing from "./components/Shared/Landing";
+import DataWrapper from "./components/Story/DataWrapper";
 
-function App() {
+const queryClient = new QueryClient();
+
+export default function App() {
+  const [isStarted, setIsStarted] = useState(false);
+  const [userData, setUserData] = useState({ address: "", name: "" });
+
+  const handleStart = (dataPayload) => {
+    setUserData(dataPayload);
+    setIsStarted(true);
+  };
+
+  // FUNGSI BARU: Buat tombol back
+  const handleReset = () => {
+    setIsStarted(false);
+    setUserData({ address: "", name: "" });
+  };
+
   return (
-    <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center">
-      <div className="text-center space-y-6">
-        <h1 className="text-5xl font-bold tracking-tight">
-          Monad Wallet Story 🚀
-        </h1>
-
-        <p className="text-zinc-400 text-lg max-w-md mx-auto">
-          Transform your onchain activity into a visual identity.
-        </p>
-
-        <button className="px-6 py-3 rounded-xl bg-white text-black font-semibold hover:bg-zinc-200 transition">
-          Test Button
-        </button>
-
-        <div className="flex justify-center gap-4 mt-6">
-          <div className="w-20 h-20 bg-blue-500 rounded-xl"></div>
-          <div className="w-20 h-20 bg-pink-500 rounded-xl"></div>
-          <div className="w-20 h-20 bg-green-500 rounded-xl"></div>
-        </div>
-      </div>
-    </div>
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <main className="w-full min-h-screen bg-monad-bg text-white overflow-hidden relative selection:bg-monad-purple selection:text-white">
+          {!isStarted ? (
+            <Landing onStart={handleStart} />
+          ) : (
+            // Lempar handleReset ke bawah
+            <DataWrapper userData={userData} onReset={handleReset} />
+          )}
+        </main>
+      </QueryClientProvider>
+    </WagmiProvider>
   );
 }
-
-export default App;
